@@ -12,14 +12,27 @@ def clean_non_info_col(frame):
     for col in features_columns:
 
         """Return common if above 80% of the values"""
-        feature = clu.x(frame[col])
+        feature = clu.common_feature(frame[col])
         if (feature is None) or (feature == 'unknown'):
             frame.drop(columns=[col], inplace=True)
 
             """ Drop the subsequent units and value columns from (field, value, unit) block"""
             val, num = col.split(' ')
             headlines = (lambda pre: pre + ' ' + num, ['Value', 'Units'])
+                           
             filtered_columns = [headline for headline in headlines if headline in frame.columns]
+            # the line above cause:
+            # Exception has occurred: TypeError
+            # unhashable type: 'list'
+            #   File "/workspaces/Garmin-Sports-Watch-Data-Cleanup/Processing.py", line 22, in <listcomp>
+            #     filtered_columns = [headline for headline in headlines if headline in frame.columns]
+            #   File "/workspaces/Garmin-Sports-Watch-Data-Cleanup/Processing.py", line 22, in clean_non_info_col
+            #     filtered_columns = [headline for headline in headlines if headline in frame.columns]
+            #   File "/workspaces/Garmin-Sports-Watch-Data-Cleanup/Pipe_Line_Execution.py", line 18, in run_clean
+            #     initial_clean_frame = pro.clean_non_info_col(frame)
+            #   File "/workspaces/Garmin-Sports-Watch-Data-Cleanup/Pipe_Line_Execution.py", line 34, in <module>
+            #     run_clean("Data/Before Processing") # add here data_folder_path
+            # TypeError: unhashable type: 'list' 
             frame.drop(columns=filtered_columns, inplace=True)
     return frame
 

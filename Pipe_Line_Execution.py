@@ -31,7 +31,7 @@ def run_clean(data_folder_path, processed_folder_path=False):
 # if __name__ == "__main__":
 #   run_clean()
 # if you don't do it like this, when someone only import this file, the run_clean() will run.
-run_clean() # add here data_folder_path
+run_clean("Data/Before Processing") # add here data_folder_path
 
 
 
