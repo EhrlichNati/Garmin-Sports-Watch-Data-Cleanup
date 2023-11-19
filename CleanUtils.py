@@ -1,18 +1,14 @@
 import pandas as pd
-import sys
-import os
-
-import Processing as pro
-
-
-
 
 def load_and_first_digest_data(path):
+
     try:
         data = pd.read_csv(path, encoding='utf-8', on_bad_lines='skip')
     except(FileNotFoundError, UnicodeDecodeError) as e:
-        print(f"An error occurred: {e}")
+        exception_type = type(e).__name__
+        print(f"An error occurred: {exception_type}")
         return pd.DataFrame([])
+
     data = data[data['Message'].isin(['record']) & ~data['Type'].isin(['Definition'])].reset_index(drop=True)
     columns_to_drop = ['Type', 'Local Number', 'Message']
     return data.drop(columns=columns_to_drop).dropna(axis=1, how='all')

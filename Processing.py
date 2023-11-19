@@ -4,30 +4,32 @@ from sklearn.impute import KNNImputer
 import pandas as pd
 
 def clean_non_info_col(frame):
-    """after splitting(def split(data)), clean columns with unknown features or NaN values.
+    """After splitting(def split(data)), clean columns with unknown features or NaN values.
     because of lack of full alignment of rows and missing values,
     the method pick the common value using def common_value."""
-    col_to_drop = []
+
     features_columns = [col for col in frame.columns if 'Field' in col]
     for col in features_columns:
-        """common if above 80% of the values"""
+
+        """Return common if above 80% of the values"""
         feature = clu.common_feature(frame[col])
         if (feature is None) or (feature == 'unknown'):
-            col_to_drop.append(col)
-            """ drop the subsequent units and value columns """
-            prefix = ['Value', 'Units']
-            for pre in prefix:
-                val, num = col.split(' ')
-                headline = pre + ' ' + num
-                if headline in frame.columns:
-                    col_to_drop.append(headline)
-    return frame.drop(columns=col_to_drop)
+            frame.drop(columns=[col], inplace=True)
+
+            """ Drop the subsequent units and value columns from (field, value, unit) block"""
+            val, num = col.split(' ')
+            headlines = (lambda pre: pre + ' ' + num, ['Value', 'Units'])
+            filtered_columns = [headline for headline in headlines if headline in frame.columns]
+            frame.drop(columns=filtered_columns, inplace=True)
+    return frame
 
 
-def transform_frame(frame, features_list):
-    """iterate over rows and append the features and their values to dictionary.
+def transform_frame(frame):
+    """Iterate over rows and append the features and their values to dictionary.
          else append None value, to be imputed later with def imputation(frame):
     """
+    features_list = clu.create_features_list(frame)
+
     dictionary = {}
     for index_row, row_series in frame.iterrows():
         for index, feature in enumerate(features_list):
@@ -44,6 +46,7 @@ def transform_frame(frame, features_list):
 
 
 def imputation(frame):
+
     if frame.empty:
         raise ValueError("Input DataFrame is empty.")
 
