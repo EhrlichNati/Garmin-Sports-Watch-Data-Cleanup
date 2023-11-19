@@ -27,8 +27,6 @@ def create_features_list(frame):
 
 
 def common_feature(df_series):
-    # take a look on is_nan, this can be replaced with something like:
-    # df_series.isna().count() / df_series.shape[0]
     normalized_counts = df_series.value_counts(normalize=True)
     max_percent = normalized_counts.max()
     return normalized_counts.idxmax() if max_percent >= 0.9 else None
