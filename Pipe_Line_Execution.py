@@ -27,10 +27,10 @@ def run_clean(data_folder_path, processed_folder_path=False):
     return imputed_frame # not sure why are you processing each file but return only the last
 
 
-# a better way to do so is,
-# if __name__ == "__main__":
-#   run_clean()
-# if you don't do it like this, when someone only import this file, the run_clean() will run.
+
+if __name__ == "__main__":
+   run_clean()
+
 run_clean("Data/Before Processing") # add here data_folder_path
 
 
