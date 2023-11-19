@@ -1,4 +1,3 @@
-README for Data Cleaning and Processing Workflow // make this a title.
 
 Data folder:
 2 files (csv) from my watch- before and after processing. 
