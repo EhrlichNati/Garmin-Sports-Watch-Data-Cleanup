@@ -1,12 +1,11 @@
 import os
-import CleanUtils as clu
-import Processing as pro
+import cleanup_utils as clu
+import processing as pro
 
 def run_clean(data_folder_path, processed_folder_path=False):
     files_names = os.listdir(data_folder_path)
     files_path = [data_folder_path + '/' + file_name for file_name in files_names]
 
-    imputed_frame = None
     file_index = 1
     for path in files_path:
         frame = clu.load_and_first_digest_data(path)
@@ -15,18 +14,17 @@ def run_clean(data_folder_path, processed_folder_path=False):
             continue
 
         # Process
-        initial_clean_frame = pro.clean_non_info_col(frame)
-        transformed_frame = pro.transform_frame(initial_clean_frame)
-        imputed_frame = pro.imputation(transformed_frame)
-
+        pro.clean_non_info_col(frame)
+        transformed_frame = pro.arrange_features_columns(frame)
+        pro.imputation(transformed_frame)
         # Optional save
         if processed_folder_path:
-            clu.save_to_folder(imputed_frame, "clean_frame, " + f'{file_index}', processed_folder_path)
+            clu.save_to_folder(transformed_frame, "clean_frame, " + f'{file_index}', processed_folder_path)
             file_index += 1
+    return
 
-    return imputed_frame
 
-
-run_clean()
+if __name__ == 'main':
+    run_clean('Data/Before Processing', processed_folder_path='/Users/netanelerlich/Desktop/Garmin Proj')
 
 

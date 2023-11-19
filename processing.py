@@ -1,5 +1,5 @@
-import CleanUtils as clu
-import CalcUtils as cal
+import cleanup_utils as clu
+import calculation_utils as cal
 from sklearn.impute import KNNImputer
 import pandas as pd
 
@@ -21,10 +21,10 @@ def clean_non_info_col(frame):
             headlines = (lambda pre: pre + ' ' + num, ['Value', 'Units'])
             filtered_columns = [headline for headline in headlines if headline in frame.columns]
             frame.drop(columns=filtered_columns, inplace=True)
-    return frame
+    return
 
 
-def transform_frame(frame):
+def arrange_features_columns(frame):
     """Iterate over rows and append the features and their values to dictionary.
          else append None value, to be imputed later with def imputation(frame):
     """
