@@ -12,7 +12,7 @@ def clean_non_info_col(frame):
     for col in features_columns:
 
         """Return common if above 80% of the values"""
-        feature = clu.common_feature(frame[col])
+        feature = clu.x(frame[col])
         if (feature is None) or (feature == 'unknown'):
             frame.drop(columns=[col], inplace=True)
 

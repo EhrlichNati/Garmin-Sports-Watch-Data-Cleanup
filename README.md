@@ -3,7 +3,7 @@ README for Data Cleaning and Processing Workflow
 Data folder:
 2 files (csv) from my watch- before and after processing. 
         
-Dependencise:
+Dependencise: # this can be converted into requirement.txt file
 pandas 2.11 
 python 3.10 
 scikit-learn 1.3.2 
