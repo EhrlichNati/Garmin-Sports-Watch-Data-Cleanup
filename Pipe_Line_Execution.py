@@ -31,7 +31,7 @@ def run_clean(data_folder_path, processed_folder_path=False):
 if __name__ == "__main__":
    run_clean()
 
-run_clean("Data/Before Processing") # add here data_folder_path
+run_clean("Data/Before Processing")
 
 
 
