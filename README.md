@@ -1,4 +1,4 @@
-README for Data Cleaning and Processing Workflow
+README for Data Cleaning and Processing Workflow // make this a title.
 
 Data folder:
 2 files (csv) from my watch- before and after processing. 
@@ -28,6 +28,7 @@ Workflow
 Functions
 
 
+// make sure this is presented well in the repository root.
 def run_clean(data_folder_path, processed_folder_path=False)
         Purpose: Orchestrates the entire cleaning and processing flow.
         Input:

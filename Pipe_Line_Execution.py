@@ -14,7 +14,7 @@ def run_clean(data_folder_path, processed_folder_path=False):
             print(f"Empty DataFrame, check encoding or records existence in pre processed data")
             continue
 
-        # Process
+        # Process # BTW, sklrean has a pipeline class https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html
         initial_clean_frame = pro.clean_non_info_col(frame)
         transformed_frame = pro.transform_frame(initial_clean_frame) # TODO: can you change the name of this function to something more meaningful?
         imputed_frame = pro.imputation(transformed_frame)
@@ -31,7 +31,7 @@ def run_clean(data_folder_path, processed_folder_path=False):
 # if __name__ == "__main__":
 #   run_clean()
 # if you don't do it like this, when someone only import this file, the run_clean() will run.
-run_clean()
+run_clean() # add here data_folder_path
 
 
 
