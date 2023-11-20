@@ -60,6 +60,8 @@ def imputation(frame):
 
     """Impute location and altitude with the assumption that they didnt changed from the closest recording"""
     if existing_knn_cols:
+
+
         frame[existing_knn_cols] = pd.DataFrame(knn_imp.fit_transform(frame[existing_knn_cols]), columns=existing_knn_cols, index=frame.index).round(3)
     position_cols = ['position_lat [semicircles]', 'position_long [semicircles]', 'enhanced_altitude [m]']
     for col in position_cols:
