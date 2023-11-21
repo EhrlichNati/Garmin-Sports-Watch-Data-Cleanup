@@ -16,7 +16,9 @@ def run_clean(data_folder_path, processed_folder_path=False):
         # Process
         pro.clean_non_info_col(frame)
         transformed_frame = pro.arrange_features_columns(frame)
+        clu.save_to_folder(transformed_frame, "clean_frame_before_imputation, " + f'{file_index}', processed_folder_path)
         pro.imputation(transformed_frame)
+
         # Optional save
         if processed_folder_path:
             clu.save_to_folder(transformed_frame, "clean_frame, " + f'{file_index}', processed_folder_path)
@@ -24,7 +26,7 @@ def run_clean(data_folder_path, processed_folder_path=False):
     return
 
 
-if __name__ == 'main':
-    run_clean('Data/Before Processing', processed_folder_path='/Users/netanelerlich/Desktop/Garmin Proj')
+if __name__ == '__main__':
+    run_clean('Data/Before Processing',  processed_folder_path='Data/After Processing/After processing- run test')
 
 
