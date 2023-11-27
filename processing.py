@@ -10,7 +10,7 @@ def clean_non_info_col(frame):
     features_columns = [col for col in frame.columns if 'Field' in col]
 
     for col in features_columns:
-        feature = clu.common_feature(frame[col], threshold=0.6)
+        feature = clu.common_feature(frame[col], threshold=0.9)
         if (feature is None) or (feature == 'unknown'):
             frame.drop(columns=[col], inplace=True)
 

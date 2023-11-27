@@ -16,6 +16,7 @@ def load_and_first_digest_data(path):
     return data.drop(columns=columns_to_drop).dropna(axis=1, how='all')
 
 
+
 def create_features_list(frame):
     """find series that have complete set of features, pick index=0 arbitrary """
     filtered_frame = frame[~frame.map(lambda cell: 'unknown' in str(cell) or pd.isna(cell)).any(axis=1)]
