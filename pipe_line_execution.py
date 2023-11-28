@@ -10,7 +10,7 @@ def run_clean(data_folder_path, processed_folder_path=False):
     for path in files_path:
         frame = clu.load_and_first_digest_data(path)
         if frame.empty:
-            print(f"Empty DataFrame, check encoding or records existence in pre processed data")
+            print(f"The DataFrame is devoid of data following standard cleanup procedures - the file lacks useful information.")
             continue
 
         # Process
@@ -27,7 +27,7 @@ def run_clean(data_folder_path, processed_folder_path=False):
 
 
 if __name__ == '__main__':
-    run_clean('Data/Before Processing',  processed_folder_path='Data/After Processing/After processing- run test')
+    run_clean('Data/Before Processing',  processed_folder_path='Data/After Processing/After processing')
 
    
 

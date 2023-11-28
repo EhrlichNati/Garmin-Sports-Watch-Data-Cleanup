@@ -51,7 +51,7 @@ def imputation(frame):
         raise ValueError("Input DataFrame is empty.")
 
     """Using KNN Imputation on columns that have high correlation"""
-    # TODO: PICK COLUMNS TO KNN WITH HIGH CORRELATION OR SOME STAT PARAMETER
+    # TODO: PICK COLUMNS TO KNN WITH HIGH CORRELATION OR SOME STAT PARAMETER?
     knn_cols = ['heart_rate [bpm]', 'cadence [rpm]', 'fractional_cadence [rpm]', 'enhanced_speed [m/s]']
     knn_imp = KNNImputer(n_neighbors=30)
     existing_knn_cols = [col for col in knn_cols if col in frame.columns]
@@ -63,7 +63,7 @@ def imputation(frame):
         frame[existing_knn_cols] = pd.DataFrame(knn_imp.fit_transform(frame[existing_knn_cols]), columns=existing_knn_cols, index=frame.index).round(3)
 
 
-    # TODO: TRAIN MODEL TO PREDICT ROUTS ACCORDING TO PREVALENT ROUTS
+    # TODO: TRAIN MODEL TO PREDICT ROUTS ACCORDING TO PREVALENT ROUTS?
     position_cols = ['position_lat [semicircles]', 'position_long [semicircles]', 'enhanced_altitude [m]']
     for col in position_cols:
         if col in frame.columns:

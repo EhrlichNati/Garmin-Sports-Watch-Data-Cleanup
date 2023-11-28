@@ -17,6 +17,8 @@ def load_and_first_digest_data(path):
 
 
 
+
+
 def create_features_list(frame):
     """find series that have complete set of features, pick index=0 arbitrary """
     filtered_frame = frame[~frame.map(lambda cell: 'unknown' in str(cell) or pd.isna(cell)).any(axis=1)]
@@ -29,16 +31,20 @@ def create_features_list(frame):
 
 
 
+
 def common_feature(df_series, threshold):
     normalized_counts = df_series.value_counts(normalize=True)
     max_percent = normalized_counts.max()
     return normalized_counts.idxmax() if max_percent >= threshold else None
 
 
+
+
 def calculate_distance_diff(current_idx, next_idx, frame):
     time_delta = frame.loc[next_idx, 'timestamp [s]'] - frame.loc[current_idx, 'timestamp [s]']
     speed = frame.loc[next_idx, 'enhanced_speed [m/s]']
     return speed * time_delta if not pd.isna(speed) and not pd.isna(time_delta) else 0
+
 
 
 def concat(frames_list):
@@ -64,31 +70,6 @@ def custom_fill(col):
                 col.loc[i] = col.loc[prev_valid]
             elif next_valid is not None:
                 col.loc[i] = col.loc[next_valid]
-
-
-
-
-def find_high_correlation_columns(frame, min_curr=0.8):
-    """ Finds and returns a list of column names with correlation above the threshold"""
-    corr_matrix = frame.corr(method='kendall')
-    print(corr_matrix.to_string())
-    cols = set()
-    for i in range(len(corr_matrix.columns)):
-        for j in range(i):
-            if abs(corr_matrix.iloc[i, j]) > min_curr:
-                cols.add(corr_matrix.columns[i])
-                cols.add(corr_matrix.columns[j])
-    return list(cols)
-
-
-
-def normalize_dataframe(df):
-    """Normalizes the numeric columns of a pandas DataFrame."""
-
-    scaler = StandardScaler()
-    normalized_data = scaler.fit_transform(df)
-    normalized_df = pd.DataFrame(normalized_data, columns=df.columns, index=df.index)
-    return normalized_df
 
 
 def save_to_folder(frame, csv_name, folder_path):
