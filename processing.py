@@ -11,6 +11,7 @@ def clean_non_info_col(frame):
 
     for col in features_columns:
         feature = clu.common_feature(frame[col], threshold=0.9)
+
         if (feature is None) or (feature == 'unknown'):
             frame.drop(columns=[col], inplace=True)
 
@@ -57,6 +58,8 @@ def imputation(frame):
     existing_knn_cols.sort()
     """Impute location and altitude with the assumption that they didnt changed from the closest recording"""
     if existing_knn_cols:
+
+
         frame[existing_knn_cols] = pd.DataFrame(knn_imp.fit_transform(frame[existing_knn_cols]), columns=existing_knn_cols, index=frame.index).round(3)
 
 

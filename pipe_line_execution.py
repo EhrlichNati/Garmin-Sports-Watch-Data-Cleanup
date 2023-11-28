@@ -25,7 +25,9 @@ def run_clean(data_folder_path, processed_folder_path=False):
     return
 
 
+
 if __name__ == '__main__':
     run_clean('Data/Before Processing',  processed_folder_path='Data/After Processing/After processing- run test')
 
+   
 
