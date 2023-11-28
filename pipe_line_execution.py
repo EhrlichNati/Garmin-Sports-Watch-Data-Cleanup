@@ -27,6 +27,7 @@ def run_clean(data_folder_path, processed_folder_path=False):
 
 
 if __name__ == '__main__':
-    run_clean('Data/Before Processing', processed_folder_path='/Users/netanelerlich/Desktop/Garmin Proj')
+    run_clean('Data/Before Processing',  processed_folder_path='Data/After Processing/After processing- run test')
 
+   
 
