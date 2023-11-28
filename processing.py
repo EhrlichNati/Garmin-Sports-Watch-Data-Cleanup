@@ -10,7 +10,6 @@ def clean_non_info_col(frame):
 
     features_columns = [col for col in frame.columns if 'Field' in col]
     for col in features_columns:
-
         """Return common if above 80% of the values"""
         feature = clu.common_feature(frame[col])
         if (feature is None) or (feature == 'unknown'):
@@ -18,7 +17,7 @@ def clean_non_info_col(frame):
 
             """ Drop the subsequent units and value columns from (field, value, unit) block"""
             val, num = col.split(' ')
-            headlines = (lambda pre: pre + ' ' + num, ['Value', 'Units'])
+            headlines = list(map(lambda pre: pre + ' ' + num, ['Value', 'Units']))
             filtered_columns = [headline for headline in headlines if headline in frame.columns]
             frame.drop(columns=filtered_columns, inplace=True)
     return
@@ -60,6 +59,8 @@ def imputation(frame):
 
     """Impute location and altitude with the assumption that they didnt changed from the closest recording"""
     if existing_knn_cols:
+
+
         frame[existing_knn_cols] = pd.DataFrame(knn_imp.fit_transform(frame[existing_knn_cols]), columns=existing_knn_cols, index=frame.index).round(3)
     position_cols = ['position_lat [semicircles]', 'position_long [semicircles]', 'enhanced_altitude [m]']
     for col in position_cols:
