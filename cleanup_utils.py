@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
+
 
 
 def load_and_first_digest_data(path):
