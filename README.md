@@ -7,7 +7,7 @@ This suite of Python scripts is designed for cleaning, processing, and imputing 
 ## Local Folder 
 This folder holds raw files exported from my Garmin watch.
 
-![Row Files Folder](Row Files Folder.png)  <!-- Replace with the actual image link -->
+![](Row Files Folder.png)
 
 ### Workflow
 
