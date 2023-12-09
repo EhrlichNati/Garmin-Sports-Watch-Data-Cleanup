@@ -30,7 +30,7 @@
 
 3. The 'unknown' rows might represent device-specific details or properties that are not directly relevant to performance analysis and can often be ignored.
 
-![Data pattern for core data](Images/body pattern.png)
+![Data pattern for core data](Images/body_pattern.png)
 
 
 ## 🚀 Getting Started
