@@ -1,5 +1,6 @@
 ## Overview
 
+
 **Garmin sent me the raw files from all the recordings made with my watch. My goal with these Python scripts is to preprocess about 1700 .csv files, making them ready for further analysis in areas like statistics, machine learning, etc.**
 
 <br>
