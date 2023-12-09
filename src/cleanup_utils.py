@@ -25,6 +25,7 @@ def create_features_list(frame):
     if filtered_frame.shape[0] == 0:
         raise Exception("Can't define a set of features. Too many 'unknown' and NaN values."
                         " Check if the frame is deprecated.")
+
     representative_row_series = filtered_frame.iloc[0].filter(like='Field')
     return [feature + ' [' + filtered_frame['Units ' + str(field).split(" ")[1]].iloc[0] + ']' for field, feature
             in representative_row_series.items()]
@@ -46,21 +47,11 @@ def calculate_distance_diff(current_idx, next_idx, frame):
     return speed * time_delta if not pd.isna(speed) and not pd.isna(time_delta) else 0
 
 
-
-def concat(frames_list):
-    all_columns = list(set().union(*(frame.columns for frame in frames_list))).sort(reverse=True)
-    adjusted_dfs = [df.reindex(columns=all_columns) for df in frames_list]
-    return pd.concat(adjusted_dfs, ignore_index=True, sort=False)
-
-
-
 def custom_fill(col):
     for i in range(len(col)):
         col_numeric = pd.to_numeric(col, errors='coerce')
-
         if pd.isna(col[i]):
             prev_valid = col_numeric.iloc[:i].last_valid_index()
-
             next_valid = col_numeric.iloc[i + 1:].first_valid_index()
             if prev_valid is not None and next_valid is not None:
                 series_to_mean = col_numeric.loc[prev_valid:next_valid].copy()

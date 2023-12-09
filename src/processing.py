@@ -1,4 +1,4 @@
-import cleanup_utils as clu
+from src import cleanup_utils as clu
 from sklearn.impute import KNNImputer
 import pandas as pd
 

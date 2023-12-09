@@ -1,0 +1,3 @@
+data_folders:
+  input_data: "Data/Before Processing"
+  output_data: "Data/After Processing"
